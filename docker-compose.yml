@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: 'mysql:latest'
+    ports:
+      - '${DB_PORT:-33066}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${DB_NAME}'
+    volumes:
+      - 'mysqldb:/var/lib/mysql'
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+      retries: 3
+      timeout: 5s
+
+volumes:
+  mysqldb:
