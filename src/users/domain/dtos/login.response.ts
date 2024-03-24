@@ -1,4 +1,5 @@
 export class LoginResponse {
+    id: string
     jwt: string
-    expiration: string
+    expires_at: string
 }

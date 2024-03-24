@@ -4,6 +4,7 @@ import { RegisterImpl } from './application/register.impl';
 import { UserRepositoryImpl } from './infra/repositories/user.repository.impl';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './infra/entities/user.entity';
+import { LoginImpl } from './application/login.impl';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
@@ -16,6 +17,10 @@ import { User } from './infra/entities/user.entity';
         {
             provide: 'UserRepositoryContract',
             useClass: UserRepositoryImpl,
+        },
+        {
+            provide: "LoginContract",
+            useClass: LoginImpl
         }
     ]
 })

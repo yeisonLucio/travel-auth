@@ -30,4 +30,12 @@ export class UserRepositoryImpl implements UserRepositoryContract{
         }
     }
 
+    async findByEmail(email: string): Promise<Either<Failure, User>> {
+        try {
+            const user = await this.userRepository.findOneBy({email: email})
+            return Either.right(user)
+        } catch (error) {
+            return Either.left(new Failure(error, 500))
+        }
+    }
 }
